@@ -14,21 +14,16 @@ use Redirect;
 class UserController extends Controller
 {
     public function index(Request $request){
-        if(isset($request->user) && ( ($request->user == 'owner') || ($request->user == 'manager') )){
-
-            if($request->user == 'owner'){
-                $users = User::where('permission', '2')->get();
-            }
-
-            if($request->user == 'manager'){
-                $users = User::where('permission', '0')->orWhere('permission', '1')->get();
-            }
+        $admin = false;
+        if(isset($request->user) &&  ($request->user == 'manager') ){
+                $admin = true;
+                $users = User::where('permission', '0')->get();
         }
         
         else{
-           $users = User::where('permission', '3')->get(); 
+           $users = User::where('permission', '1')->get(); 
         }
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.index', compact('users', 'admin'));
     }
     
     
@@ -70,12 +65,7 @@ class UserController extends Controller
     public function store(AddUserRequestAdmin $request)
     {
 //        dd($request->all());
-        $res = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'permission' => $request->permission,
-        ]);
+        $res = User::create($request->all());
         
         if(is_object($res)){
             return redirect()->back()->with('success', 'تمت اضافه العضو بنجاح');

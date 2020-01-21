@@ -62,7 +62,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" action="{{url('admin/users').'/'.Auth::user()->id}}">
-             @csrf
+             {{ csrf_field() }}
+             <input type="hidden" name="permission" value="{{Auth::user()->permission}}">
              <input name="_method" type="hidden" value="PATCH" />
             <div class="modal-header">
                 <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -72,10 +73,25 @@
                 <div class="alert alert-success hidden admin_success text-center"></div>
                 <div class="alert alert-danger hidden admin_error text-center"></div>
                 <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="الاسم" value="{{Auth::user()->name}}">
+                </div>
+                <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="البريد الالكترونى" value="{{Auth::user()->email}}">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="كلمة المرور">
+                    <input type="number" name="phone" id='' placeholder="رقم الجوال" class="form-control" value="{{ Auth::user()->phone }}" >
+                </div>
+                <div class="form-group">
+                    <select name="city" class="select" id=''  required>
+                        <option value="">...</option>
+                        @foreach(ksaCities() as $key => $val)
+                        <option value="{{$key}}" {{Auth::user()->city ==  $key ? 'selected' : ''}}>{{$val}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="كلمة المرور" autocomplete="new-password">
                 </div>
                 <div class="form-group">
                     <input type="password" name="password_confirmation" class="form-control" placeholder="تأكيد كلمة المرور">

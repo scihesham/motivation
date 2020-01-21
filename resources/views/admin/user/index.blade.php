@@ -40,6 +40,11 @@
                             <th>#</th>
                             <th>الاسم</th>
                             <th>البريد الالكترونى</th>
+                            <th>رقم الجوال</th>
+                            <th>المدينه</th>
+                            @if(!$admin)
+                            <th>الكوينز</th>
+                            @endif
                             <th>الصلاحيه</th>
                             <th class="text-center">تعديل</th>
                             <th class="text-center">حذف</th>
@@ -51,11 +56,21 @@
                             <td>{{$key+1}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td>{{ksaCities()[$user->city]}}</td>
+                            @if(!$admin)
+                            <td>{{$user->coins}}</td>
+                            @endif
                             <td>{{permissions()[$user->permission]}}</td>
+                            @if($user->id != Auth::user()->id)
                             <td class="text-center"><a class="btn btn-primary btn-sm update_user_link" data-toggle="modal" data-target=".update_user_modal" data-href="{{url('admin/users').'/'.$user->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
                             <td class="text-center" style="vertical-align: middle;">
                                 <a class="btn btn-danger btn-sm" href="{{url('admin/users').'/'.$user->id.'/delete'}}" onclick='return myfunc()'><i class="fa fa-trash-o"></i></a>
                             </td>
+                            @else
+                            <td></td>
+                            <td></td>
+                            @endif
                         </tr>
                         @endforeach  
                     </tbody>
@@ -64,6 +79,11 @@
                             <th>#</th>
                             <th>الاسم</th>
                             <th>البريد الالكترونى</th>
+                            <th>رقم الجوال</th>
+                            <th>المدينه</th>
+                            @if(!$admin)
+                            <th>الكوينز</th>
+                            @endif
                             <th>الصلاحيه</th>
                             <th class="text-center">تعديل</th>
                             <th class="text-center">حذف</th>
@@ -128,11 +148,15 @@
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label>اسم العضو </label>
-                                            <input type="text" name="name" id='art_name' placeholder="اسم العضو" class="form-control" value="{{ old('name') }}" required>
+                                            <input type="text" name="name" id='' placeholder="اسم العضو" class="form-control" value="{{ old('name') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>البريد الالكترونى </label>
-                                            <input type="text" name="email" id='art_name' placeholder="البريد الالكترونى" class="form-control" value="{{ old('email') }}" required>
+                                            <input type="text" name="email" id='' placeholder="البريد الالكترونى" class="form-control" value="{{ old('email') }}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>رقم الجوال </label>
+                                            <input type="number" name="phone" id='' placeholder="رقم الجوال" class="form-control" value="{{ old('phone') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>الصلاحيه *</label>
@@ -143,6 +167,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <label>المدينه *</label>
+                                            <select name="city" class="select" id='art_name'  required>
+                                                <option value="">...</option>
+                                                @foreach(ksaCities() as $key => $val)
+                                                <option value="{{$key}}">{{$val}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
                                         <div class="form-group">
                                             <label>الرقم السري </label>
                                             <input type="password" name="password" id='art_name' placeholder="الرقم السري" class="form-control" autocomplete="new-password" required>

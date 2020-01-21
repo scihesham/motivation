@@ -1,23 +1,12 @@
 <?php
 
 function target(){
-    $array = ['admin', 'manager', '/', '/'];
+    $array = ['admin'];
     
     if(Auth::user()->permission == 0){
         return $array[0];
     }
 
-    if(Auth::user()->permission == 1){
-        return $array[1];
-    }
-    
-    if(Auth::user()->permission == 2){
-        return $array[2];
-    }
-    
-    if(Auth::user()->permission == 3){
-        return $array[3];
-    }
         
 }
 
@@ -25,9 +14,7 @@ function target(){
 function permissions(){
     $array = [
               'مدير الموقع',
-              'مشرف',
-              'صاحب مشروع',
-              'شركه'
+              'عضو'
              ];
     // Admin => 0, User => 1
     return $array;

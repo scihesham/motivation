@@ -15,6 +15,12 @@
                         <label>البريد الالكترونى </label>
                         <input type="text" name="email" id='art_name' placeholder="البريد الالكترونى" class="form-control" value="{{$user->email}}" required>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>رقم الجوال </label>
+                        <input type="number" name="phone" id='' placeholder="رقم الجوال" class="form-control" value="{{ $user->phone }}" required>
+                    </div>
+                    
                     <div class="form-group">
                         <label>الصلاحيه *</label>
                         <select name="permission" class="select form-control" id='art_name' required>
@@ -24,6 +30,17 @@
                             @endforeach
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>المدينه *</label>
+                        <select name="city" class="select form-control" id='art_name'  required>
+                            <option value="">...</option>
+                            @foreach(ksaCities() as $key => $val)
+                            <option value="{{$key}}" {{$user->city ==  $key ? 'selected' : ''}}>{{$val}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
                     <div class="form-group">
                         <label>الرقم السري </label>
                         <input type="password" name="password" id='art_name' placeholder="الرقم السري" class="form-control" autocomplete="new-password" >

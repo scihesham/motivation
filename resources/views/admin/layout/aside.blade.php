@@ -21,38 +21,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('admin/users')}}?user=owner"><i class="fa fa-circle-o"></i> اصحاب المشاريع</a></li>
-                    <li><a href="{{url('admin/users')}}?user=company"><i class="fa fa-circle-o"></i> الشركات</a></li>
+                    <li><a href="{{url('admin/users')}}"><i class="fa fa-circle-o"></i> الاعضاء</a></li>
                     <li><a href="{{url('admin/users')}}?user=manager"><i class="fa fa-circle-o"></i> المدراء</a></li>
                 </ul>
             </li>
             
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-building" aria-hidden="true"></i> <span>المشروعات</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('admin/projects')}}?project=non"><i class="fa fa-circle-o"></i> غير منفذه</a></li>
-                    <li><a href="{{url('admin/projects')}}?project=under"><i class="fa fa-circle-o"></i> تحت التنفيذ</a></li>
-                    <li><a href="{{url('admin/projects')}}?project=done"><i class="fa fa-circle-o"></i> منفذه</a></li>
-                </ul>
-            </li>
-            
-            <li class="treeview">
-                <a href="#">
-                   <i class="fa fa-gavel" aria-hidden="true"></i> <span>المنازعات</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('admin/project/offer/disputes')}}?status=open"><i class="fa fa-circle-o"></i> مفتوحه</a></li>
-                    <li><a href="{{url('admin/project/offer/disputes')}}?status=solved"><i class="fa fa-circle-o"></i> تم حلها</a></li>
-                </ul>
-            </li>
 
         </ul>
     </section>
