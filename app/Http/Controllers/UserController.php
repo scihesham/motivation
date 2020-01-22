@@ -27,40 +27,6 @@ class UserController extends Controller
     }
     
     
-//    public function store(Request $request){
-//
-//        $rules = [
-//            'name' => ['required', 'string', 'max:255'],
-//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-//            'password' => ['required', 'string', 'min:6', 'confirmed'],
-//            'permission' => ['required', 'integer',],
-//        ];
-//
-//        $messages = [
-//
-//            'name.required' => 'اسم العضو مطلوب',
-//            'email.required' => 'البريد الالكترونى مطلوب',
-//            'password.required' => 'الرقم السري مطلوب',
-//            'permission.required' => 'صلاحيه العضو مطلوبه',
-//        ];
-//
-//        $validation = Validator::make($request->all(),$rules, $messages);
-//
-//        dd($request->permission);
-//        
-//        if ($validation->fails()){
-//            return response()->json(['status' => 0, 'msg' => $validation->messages()->first()]);
-//        }
-//        $res = User::create($request->all());
-//        if(is_object($res)){ 
-//            return response()->json(['status' => 1, 'msg' => 'تم إضافة العضو بنجاح']);
-//        }
-//        else{
-//           return response()->json(['status' => 0, 'msg' => 'هناك مشكله فى اضافه العضو']);
-//        }
-//        
-//    }
-    
     
     public function store(AddUserRequestAdmin $request)
     {

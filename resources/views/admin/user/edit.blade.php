@@ -13,7 +13,7 @@
 
                     <div class="form-group">
                         <label>البريد الالكترونى </label>
-                        <input type="text" name="email" id='art_name' placeholder="البريد الالكترونى" class="form-control" value="{{$user->email}}" required>
+                        <input type="email" name="email" id='art_name' placeholder="البريد الالكترونى" class="form-control" value="{{$user->email}}" required>
                     </div>
                     
                     <div class="form-group">

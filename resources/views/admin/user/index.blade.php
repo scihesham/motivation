@@ -33,7 +33,7 @@
         <div class="box">
 
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body fit" >
                 <table id="users-table" class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -63,7 +63,7 @@
                             @endif
                             <td>{{permissions()[$user->permission]}}</td>
                             @if($user->id != Auth::user()->id)
-                            <td class="text-center"><a class="btn btn-primary btn-sm update_user_link" data-toggle="modal" data-target=".update_user_modal" data-href="{{url('admin/users').'/'.$user->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
+                            <td class="text-center center-vc"><a class="btn btn-primary btn-sm update_user_link" data-toggle="modal" data-target=".update_user_modal" data-href="{{url('admin/users').'/'.$user->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
                             <td class="text-center" style="vertical-align: middle;">
                                 <a class="btn btn-danger btn-sm" href="{{url('admin/users').'/'.$user->id.'/delete'}}" onclick='return myfunc()'><i class="fa fa-trash-o"></i></a>
                             </td>
@@ -145,14 +145,14 @@
                             {{ csrf_field() }}
                             <div class="modal-body">
                                 <div class="panel panel-default">
-                                    <div class="panel-body">
+                                    <div class="panel-body" >
                                         <div class="form-group">
                                             <label>اسم العضو </label>
                                             <input type="text" name="name" id='' placeholder="اسم العضو" class="form-control" value="{{ old('name') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>البريد الالكترونى </label>
-                                            <input type="text" name="email" id='' placeholder="البريد الالكترونى" class="form-control" value="{{ old('email') }}" required>
+                                            <input type="email" name="email" id='' placeholder="البريد الالكترونى" class="form-control" value="{{ old('email') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>رقم الجوال </label>

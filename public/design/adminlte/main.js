@@ -346,18 +346,18 @@ $(document).ready(function () {
     });
     
     
-    /********************** project ajax ***********************/
+    /********************** category ajax ***********************/
     /**
-     * get update project form
+     * get update category form
      */
 
-    $('.update_project_link').click(function () {
+    $('.update_cats_link').click(function () {
         $.ajax({
             url: $(this).data('href'),
             type: 'get',
             dataType: 'html',
             success: function (data) {
-                $('.update_project_modal .modal-body').html(data);
+                $('.update_cats_modal .modal-body').html(data);
             }
         })
     });
@@ -386,20 +386,21 @@ $(document).ready(function () {
     /**************************************************************/
     
     
-        
-    /*************************** offer ajax ************************/
+
+    
+   /*************************** company ajax ************************/
 
     /**
-     * get show offer form
+     * get update company form
      */
 
-    $('.show_offer_link').click(function () {
+    $('.update_company_link').click(function () {
         $.ajax({
             url: $(this).data('href'),
             type: 'get',
             dataType: 'html',
             success: function (data) {
-                $('.show_offer_modal .modal-body').html(data);
+                $('.update_company_modal .modal-body').html(data);
             }
         })
     });
@@ -407,58 +408,20 @@ $(document).ready(function () {
     /**************************************************************/
     
     
-   /*************************** message ajax ************************/
+    
+    /*************************** activity ajax ************************/
 
     /**
-     * get show message form
+     * get update activity form
      */
 
-    $('.show_message_link').click(function () {
+    $('.update_act_link').click(function () {
         $.ajax({
             url: $(this).data('href'),
             type: 'get',
             dataType: 'html',
             success: function (data) {
-                $('.show_message_modal .modal-body').html(data);
-            }
-        })
-    });
-
-    /**************************************************************/
-    
-    
-       /*************************** milestone ajax ************************/
-
-    /**
-     * get show message form
-     */
-
-    $('.show_offer_milestone_link').click(function () {
-        $.ajax({
-            url: $(this).data('href'),
-            type: 'get',
-            dataType: 'html',
-            success: function (data) {
-                $('.show_offer_milestone_modal .modal-body').html(data);
-            }
-        })
-    });
-
-    /**************************************************************/
-    
-   /*************************** dispute ajax ************************/
-
-    /**
-     * get update dispute form
-     */
-
-    $('.update_dispute_link').click(function () {
-        $.ajax({
-            url: $(this).data('href'),
-            type: 'get',
-            dataType: 'html',
-            success: function (data) {
-                $('.update_dispute_modal .modal-body').html(data);
+                $('.update_act_modal .modal-body').html(data);
             }
         })
     });

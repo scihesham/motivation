@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectRequest extends FormRequest
+class ActivityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,18 @@ class ProjectRequest extends FormRequest
      */
     public function rules()
     {
-            return [                
+         if($this->method()=="PATCH"){
+            return [
                 'title' => ['required', 'string', 'max:255'],
-                'city' => ['required', 'numeric'],
                 'desc' => ['required', 'string'],
-                'attachments.*' => ['mimes:jpeg,png,jpg,pdf,txt,docx', 'max:10000'],
-            ];
-
+                'ordering' => ['required', 'integer'],
+                'coins' => ['required', 'integer'],
+            ];  
+         }
+        return [
+            'title' => ['required', 'string', 'max:255'],
+            'desc' => ['required', 'string'],
+            'coins' => ['required', 'integer'],
+        ];
     }
 }
