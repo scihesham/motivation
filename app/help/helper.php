@@ -86,6 +86,3 @@ function editFile($request, $folder, $obj){
 }
 
 ?>
-
-
-
