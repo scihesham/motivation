@@ -10,7 +10,6 @@ class coupon extends Model
         'coupon_title', 'coupon_percentage', 'coupon_details', 'coupon_count', 'company_id', 'category_id', 'attachment_id'
    ];
     
-    
     public function company(){
         return $this->belongsTo('App\Company', 'company_id')->withDefault();
     }
