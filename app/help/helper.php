@@ -44,15 +44,48 @@ function ksaCities(){
 }
 
 
-function messagesNotification(){
-    
-    $user_id = Auth::user()->id;
-    $messages = collect(\App\Message::whereRaw("id IN (select max(`id`) from messages where to_user=$user_id or send_from=$user_id GROUP BY offer_status_id)")->orderBy('id', 'desc')->limit(4)->get());
-        
-    $dispute = collect(\App\DisputeMessage::orderBy('id', 'desc')->limit(4)->get());
-    $all_messages = $dispute->merge($messages)->sortByDesc('created_at');
- 
-    return $all_messages;   
+function companies(){
+    $companies = \App\Company::all();
+    return $companies;
+}
+
+function categories(){
+    $categories = \App\Category::all();
+    return $categories;
+}
+
+/* add one file */
+function addFile($request, $folder){
+    $attach = $request->attachment;
+    $newname =  Auth::user()->id.'_'.date("d_m_Y").rand(1, 1000).time().'_'.rand(1, 1000).'.'.$attach->getClientOriginalExtension();
+    $attach->move(public_path('upload'.'/'.$folder), $newname); 
+    $input = [];
+    $input['name'] = $attach->getClientOriginalName();
+    $input['path'] = $folder.'/'.$newname;
+    $attach_res = \App\Attachment::create($input);
+    $attachment_id = $attach_res->id;
+    return $attachment_id;
+}
+
+/* edit file */
+function editFile($request, $folder, $obj){
+    $attach = $request->attachment;
+    $attachment = $request->attachment;
+    $newname =  Auth::user()->id.'_'.date("d_m_Y").rand(1, 1000).time().'_'.rand(1, 1000).'.'.$attach->getClientOriginalExtension();
+    $attachment->move(public_path('upload'.'/'.$folder), $newname);
+    /* delete old file */
+    $file_path = public_path('upload/'.$obj->attach->path);  
+    if(File::exists($file_path)) {
+            File::delete($file_path);
+    }
+    /* edit attachment database */
+    $obj->attach->fill([
+        'name' => $attachment->getClientOriginalName(),
+        'path' => $folder.'/'.$newname
+    ])->save();
 }
 
 ?>
+
+
+

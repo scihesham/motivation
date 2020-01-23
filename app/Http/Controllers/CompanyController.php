@@ -49,7 +49,7 @@ class CompanyController extends Controller
         $res = $company->fill($request->all())->save();
 
         if($res == true){
-            return redirect()->back()->with('success', 'تم تعديل العضو بنجاح');
+            return redirect()->back()->with('success', 'تم التعديل بنجاح');
         }
         else{
            return redirect()->back()->with('error', 'Something Went Wrong'); 

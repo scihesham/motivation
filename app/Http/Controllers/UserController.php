@@ -14,6 +14,7 @@ use Redirect;
 class UserController extends Controller
 {
     public function index(Request $request){
+        
         $admin = false;
         if(isset($request->user) &&  ($request->user == 'manager') ){
                 $admin = true;
@@ -31,7 +32,11 @@ class UserController extends Controller
     public function store(AddUserRequestAdmin $request)
     {
 //        dd($request->all());
+        
         $res = User::create($request->all());
+        
+        $res->code = 'user'. $res->id;
+        $res->save();
         
         if(is_object($res)){
             return redirect()->back()->with('success', 'تمت اضافه العضو بنجاح');

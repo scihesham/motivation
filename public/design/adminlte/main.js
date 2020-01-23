@@ -428,6 +428,25 @@ $(document).ready(function () {
 
     /**************************************************************/
     
+    /*************************** coupon ajax ************************/
+
+    /**
+     * get update coupon form
+     */
+
+    $('.update_coupon_link').click(function () {
+        $.ajax({
+            url: $(this).data('href'),
+            type: 'get',
+            dataType: 'html',
+            success: function (data) {
+                $('.update_coupon_modal .modal-body').html(data);
+            }
+        })
+    });
+
+    /**************************************************************/
+    
 
     /**
      * Change password for admin

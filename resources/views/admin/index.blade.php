@@ -13,8 +13,8 @@
                 <span class="info-box-icon bg-aqua"><i class="fa fa-building-o" aria-hidden="true"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"></span>
-                    <span class="info-box-number"></span>
+                    <span class="info-box-text">عدد الشركات</span>
+                    <span class="info-box-number">{{\App\Company::count()}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -25,8 +25,8 @@
                 <span class="info-box-icon bg-aqua"><i class="fa fa-users" aria-hidden="true"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"></span>
-                    <span class="info-box-number"></span>
+                        <span class="info-box-text">عدد الاعضاء</span>
+                    <span class="info-box-number">{{\App\User::count()}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -34,9 +34,5 @@
         </div>        
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        alert('hello');
-    });
-</script>
+
 @endsection

@@ -1,6 +1,5 @@
 <?php
 
-/* please note that offer_id refers to offer_status_id */
 
 Route::group(['middleware' => ['web', 'admin']], function(){
 
@@ -23,6 +22,10 @@ Route::group(['middleware' => ['web', 'admin']], function(){
  Route::resource('admin/activities', 'ActivityController');
  Route::get('admin/activities/{id}/delete', 'ActivityController@destroy');
 
+ /* CouponController */   
+ Route::resource('admin/coupons', 'CouponController');
+ Route::get('admin/coupons/{id}/delete', 'CouponController@destroy');
+    
     
 });
 

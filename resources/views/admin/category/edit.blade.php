@@ -2,7 +2,7 @@
 
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>
-    CKEDITOR.replace('summary-ckeditor-edit');
+    CKEDITOR.replace('summary-ckeditor-edit-cat');
 
 </script>
 
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label>الوصف * </label>
-                        <textarea class="form-control{{ $errors->has('desc') ? ' is-invalid' : '' }}" id="summary-ckeditor-edit" name="desc" required>{{ $cat->desc }}</textarea>
+                        <textarea class="form-control{{ $errors->has('desc') ? ' is-invalid' : '' }}" id="summary-ckeditor-edit-cat" name="desc" required>{{ $cat->desc }}</textarea>
                     </div>
                     
                     <div class="form-group">

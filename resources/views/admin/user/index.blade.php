@@ -44,6 +44,7 @@
                             <th>المدينه</th>
                             @if(!$admin)
                             <th>الكوينز</th>
+                            <th>الكود</th>
                             @endif
                             <th>الصلاحيه</th>
                             <th class="text-center">تعديل</th>
@@ -60,6 +61,7 @@
                             <td>{{ksaCities()[$user->city]}}</td>
                             @if(!$admin)
                             <td>{{$user->coins}}</td>
+                            <td>{{$user->code}}</td>
                             @endif
                             <td>{{permissions()[$user->permission]}}</td>
                             @if($user->id != Auth::user()->id)
@@ -83,6 +85,7 @@
                             <th>المدينه</th>
                             @if(!$admin)
                             <th>الكوينز</th>
+                            <th>الكود</th>
                             @endif
                             <th>الصلاحيه</th>
                             <th class="text-center">تعديل</th>
