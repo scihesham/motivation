@@ -22,6 +22,10 @@
                 <textarea class="form-control{{ $errors->has('desc') ? ' is-invalid' : '' }}" id="summary-ckeditor-edit" name="desc" required>{{ $act->desc }}</textarea>
             </div>
             <div class="form-group">
+                <label>الوحده الحسابيه </label>
+                <input type="text" name="compute_unit" id='' placeholder="الوحده الحسابيه" class="form-control" value="{{ $act->compute_unit }}" required>
+            </div>
+            <div class="form-group">
                 <label>عدد الكوينز </label>
                 <input type="text" name="coins" id='' placeholder="عدد الكوينز" class="form-control" value="{{ $act->coins }}" required>
             </div>

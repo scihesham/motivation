@@ -9,11 +9,11 @@
 @section('content')
 
 @section('page_title')
-قائمة الانشطه
+قائمة المراحل
 @endsection
 
 @section('active_title')
-قائمة الانشطه
+قائمة المراحل
 @endsection
 
 
@@ -21,12 +21,12 @@
 <section class="content">
 
     <div style="width:99%; text-align:left; margin-top:10px">
-        <a href="" class="btn btn-primary margin-bottom" data-toggle="modal" data-target=".create_act_modal"><i class="fa fa-plus"></i> إضافة نشاط جديد</a>
+        <a href="" class="btn btn-primary margin-bottom" data-toggle="modal" data-target=".create_stage_modal"><i class="fa fa-plus"></i> إضافة مرحله جديده</a>
     </div>
     <div class="row dattable">
         <div class="col-xs-12">
             <div class="panel panel-primary">
-                <div class="panel-heading">قائمة الانشطه</div>
+                <div class="panel-heading">قائمة المراحل</div>
                 <div class="panel-body fit" style="overflow-x:auto">
 
                     <div class="box">
@@ -38,33 +38,23 @@
                                     <tr>
                                         <th>#</th>
                                         <th>العنوان</th>
-                                        <th>الوصف</th>
-                                        <th>الوحده الحسابيه</th>
-                                        <th>عدد الكوينز</th>
+                                        <th>بدايه الكوينز</th>
                                         <th>الرتبه</th>
                                         <th class="text-center">تعديل</th>
                                         <th class="text-center">حذف</th>
                                     </tr>
                                 </thead>
                                 <tbody class="alluser">
-                                    @foreach ($acts as $key => $act)
+                                    @foreach ($stages as $key => $stage)
                                     <tr class="">
                                         <td>{{$key+1}}</td>
-                                        <td class="text-center center-vc">{{$act->title}}</td>
-                                        <td class="text-center center-vc" style="width:230px">
-                                            <div class="content-table-cont" style="">
-                                                <div class="content-table" style="">
-                                                    {!! $act->desc !!}
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center center-vc">{{$act->compute_unit}}</td>
-                                        <td class="text-center center-vc">{{$act->coins}}</td>
-                                        <td class="text-center center-vc">{{$act->ordering}}</td>
+                                        <td class="text-center center-vc">{{$stage->title}}</td>
+                                        <td class="text-center center-vc">{{$stage->starts}}</td>
+                                        <td class="text-center center-vc">{{$stage->ordering}}</td>
 
-                                        <td class="text-center center-vc"><a class="btn btn-primary btn-sm update_act_link" data-toggle="modal" data-target=".update_act_modal" data-href="{{url('admin/activities').'/'.$act->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
+                                        <td class="text-center center-vc"><a class="btn btn-primary btn-sm update_stage_link" data-toggle="modal" data-target=".update_stage_modal" data-href="{{url('admin/stages').'/'.$stage->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
                                         <td class="text-center" style="vertical-align: middle;">
-                                            <a class="btn btn-danger btn-sm" href="{{url('admin/activities').'/'.$act->id.'/delete'}}" onclick='return myfuncAr()'><i class="fa fa-trash-o"></i></a>
+                                            <a class="btn btn-danger btn-sm" href="{{url('admin/stages').'/'.$stage->id.'/delete'}}" onclick='return myfuncAr()'><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -73,9 +63,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>العنوان</th>
-                                        <th>الوصف</th>
-                                        <th>الوحده الحسابيه</th>
-                                        <th>عدد الكوينز</th>
+                                        <th>بدايه الكوينز</th>
                                         <th>الرتبه</th>
                                         <th class="text-center">تعديل</th>
                                         <th class="text-center">حذف</th>
@@ -117,23 +105,18 @@
 
 </script>
 
-<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-<script>
-    CKEDITOR.replace('summary-ckeditor');
-
-</script>
 @endsection
 
 
 
-<div class="modal fade create_act_modal">
+<div class="modal fade create_stage_modal">
     <div class="modal-dialog">
         <div class="modal-content" style="width:700px">
-            <form method="post" action="{{url('admin/activities')}}">
+            <form method="post" action="{{url('admin/stages')}}">
 
                 <div class="modal-header">
                     <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">إضافة نشاط</h4>
+                    <h4 class="modal-title">إضافة مرحله</h4>
                 </div>
                 <div class="modal-body">
                     <!--
@@ -145,21 +128,14 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label>عنوان النشاط </label>
-                                    <input type="text" name="title" id='' placeholder="عنوان النشاط" class="form-control" value="{{ old('title') }}" required>
+                                    <label>عنوان المرحله </label>
+                                    <input type="text" name="title" id='' placeholder="عنوان المرحله" class="form-control" value="{{ old('title') }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>الوصف * </label>
-                                    <textarea class="form-control{{ $errors->has('desc') ? ' is-invalid' : '' }}" id="summary-ckeditor" name="desc" required>{{ old('desc') }}</textarea>
+                                    <label>بدايه الكوينز  </label>
+                                    <input type="number" name="starts" id='' placeholder="عدد الكوينز" class="form-control" value="{{ old('starts') }}" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>الوحده الحسابيه </label>
-                                    <input type="text" name="compute_unit" id='' placeholder="الوحده الحسابيه" class="form-control" value="{{ old('compute_unit') }}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>عدد الكوينز  </label>
-                                    <input type="text" name="coins" id='' placeholder="عدد الكوينز" class="form-control" value="{{ old('coins') }}" required>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -171,8 +147,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">غلق</button>
-                    <!--                <button type="button" class="btn btn-primary create_application_button pull-left">إضافة عضو</button>-->
-                    <button type="submit" class="btn btn-primary pull-left">إضافة نشاط</button>
+                    <button type="submit" class="btn btn-primary pull-left">إضافة مرحله</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -180,14 +155,14 @@
 </div><!-- /.modal -->
 
 
-<div class="modal fade update_act_modal">
+<div class="modal fade update_stage_modal">
     <div class="modal-dialog">
         <div class="modal-content" style="width:700px">
 
 
             <div class="modal-header">
                 <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">تعديل النشاط</h4>
+                <h4 class="modal-title">تعديل المرحله</h4>
             </div>
             <div class="modal-body body-edit"></div>
 

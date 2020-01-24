@@ -26,6 +26,10 @@ Route::group(['middleware' => ['web', 'admin']], function(){
  Route::resource('admin/coupons', 'CouponController');
  Route::get('admin/coupons/{id}/delete', 'CouponController@destroy');
     
+ /* StageController */   
+ Route::resource('admin/stages', 'StageController');
+ Route::get('admin/stages/{id}/delete', 'StageController@destroy');
+    
     
 });
 

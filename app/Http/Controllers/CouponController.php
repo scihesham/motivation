@@ -58,10 +58,8 @@ class CouponController extends Controller
         $coupon = Coupon::find($id);
         
         if(is_object($coupon)){
-            if(!empty($request->attachment)){
-                $folder = 'coupons';
-                editFile($request, $folder, $coupon);
-            }
+            $folder = 'coupons';
+            editFile($request, $folder, $coupon);
 
             $res = $coupon->fill($request->all())->save();
             if($res == true){
@@ -84,13 +82,7 @@ class CouponController extends Controller
         $coupon = Coupon::find($id);
         $res = $coupon->delete();
         
-        if(isset($coupon->attach->path)){
-            $file_path = public_path('upload/'.$coupon->attach->path);  
-            if(File::exists($file_path)) {
-                    File::delete($file_path);
-            }
-            $coupon->attach->delete();
-        }
+        deleteFile($coupon);
         
         if($res == true){
             return redirect()->back()->with('success', 'تم الحذف بنجاح');

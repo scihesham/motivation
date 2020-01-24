@@ -17,7 +17,6 @@
 قائمة الاعضاء
 @endsection
 
-
 <!-- Main content -->
 <section class="content">
 
@@ -44,6 +43,7 @@
                             <th>المدينه</th>
                             @if(!$admin)
                             <th>الكوينز</th>
+                            <th>المرحله</th>
                             <th>الكود</th>
                             @endif
                             <th>الصلاحيه</th>
@@ -61,13 +61,18 @@
                             <td>{{ksaCities()[$user->city]}}</td>
                             @if(!$admin)
                             <td>{{$user->coins}}</td>
+                            <td class="text-center">
+                                <a class="update_stage_link" data-toggle="modal" data-target=".update_stage_modal" data-href="{{url('admin/stages').'/'.$user->stage()->id.'/edit'}}" style="cursor:pointer">
+                                    {{$user->stage()->title}}
+                                </a>
+                            </td>
                             <td>{{$user->code}}</td>
                             @endif
                             <td>{{permissions()[$user->permission]}}</td>
                             @if($user->id != Auth::user()->id)
                             <td class="text-center center-vc"><a class="btn btn-primary btn-sm update_user_link" data-toggle="modal" data-target=".update_user_modal" data-href="{{url('admin/users').'/'.$user->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
                             <td class="text-center" style="vertical-align: middle;">
-                                <a class="btn btn-danger btn-sm" href="{{url('admin/users').'/'.$user->id.'/delete'}}" onclick='return myfunc()'><i class="fa fa-trash-o"></i></a>
+                                <a class="btn btn-danger btn-sm" href="{{url('admin/users').'/'.$user->id.'/delete'}}" onclick='return myfuncAr()'><i class="fa fa-trash-o"></i></a>
                             </td>
                             @else
                             <td></td>
@@ -85,6 +90,7 @@
                             <th>المدينه</th>
                             @if(!$admin)
                             <th>الكوينز</th>
+                            <th>المرحله</th>
                             <th>الكود</th>
                             @endif
                             <th>الصلاحيه</th>
@@ -221,6 +227,23 @@
             <div class="modal-body body-edit"></div>
           
            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade update_stage_modal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:700px">
+
+
+            <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">تعديل المرحله</h4>
+            </div>
+            <div class="modal-body body-edit"></div>
+
+
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

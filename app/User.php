@@ -36,4 +36,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    
+    public function stage(){        
+        $stages = Stage::orderBy('starts', 'desc')->get();
+        foreach($stages as $stage){
+            if($this->coins >= $stage->starts){
+                 return $stage;   
+            }
+        }
+        
+        /* if missmatch => fill all columns with empty */
+        $stage_obj = new Stage();
+        $columns = $this->getConnection()->getSchemaBuilder()->getColumnListing('stages');
+        foreach($columns as $key => $val){
+            $stage_obj[$val] = '';
+        }
+        return $stage_obj;
+    }
 }

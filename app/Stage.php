@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Activity extends Model
+class Stage extends Model
 {
     protected $fillable = [
-        'title', 'desc', 'coins', 'ordering', 'compute_unit'
+         'title', 'starts', 'ordering'
     ];
 }

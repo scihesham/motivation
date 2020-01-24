@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class coupon extends Model
 {
    protected $fillable = [
-        'coupon_title', 'coupon_percentage', 'coupon_details', 'coupon_count', 'company_id', 'category_id', 'attachment_id'
+        'coupon_title', 'coupon_percentage', 'coupon_details', 'coupon_count', 'company_id', 'category_id', 'attachment_id',
+        'coins', 'stage_id'
    ];
     
     public function company(){
@@ -20,6 +21,10 @@ class coupon extends Model
     
     public function attach(){
         return $this->belongsTo('App\Attachment', 'attachment_id')->withDefault();
+    }
+    
+    public function stage(){
+        return $this->belongsTo('App\Stage')->withDefault();
     }
     
 }

@@ -3,10 +3,14 @@
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace('summary-ckeditor-edit');
+
 </script>
 
 <script>
-    $(".select").selectBoxIt( { autoWidth: false } );
+    $(".select").selectBoxIt({
+        autoWidth: false
+    });
+
 </script>
 
 
@@ -36,7 +40,7 @@
 
             <div class="form-group">
                 <label>صورة الكوبون </label>
-                <input type="file" name="attachment" id='' class="form-control" >
+                <input type="file" name="attachment" id='' class="form-control">
             </div>
 
             <div class="form-group">
@@ -59,7 +63,20 @@
                 </select>
             </div>
 
-            
+            <div class="form-group">
+                <label>المرحله *</label>
+                <select name="stage_id" class="select" required>
+                    <option value="">...</option>
+                    @foreach(\App\Stage::orderBy('ordering', 'desc')->get() as $key => $val)
+                    <option value="{{$val->id}}" {{$coupon->stage->id == $val->id ? 'selected' : ''}}>{{$val->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label>عدد الكوينز </label>
+                <input type="number" name="coins" id='' placeholder="العدد" class="form-control" value="{{ $coupon->coins }}" required>
+            </div>
+
         </div>
     </div>
     <div class="modal-footer edit-modal">

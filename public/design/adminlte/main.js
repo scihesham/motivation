@@ -447,6 +447,26 @@ $(document).ready(function () {
 
     /**************************************************************/
     
+    
+        /*************************** stage ajax ************************/
+
+    /**
+     * get update stage form
+     */
+
+    $('.update_stage_link').click(function () {
+        $.ajax({
+            url: $(this).data('href'),
+            type: 'get',
+            dataType: 'html',
+            success: function (data) {
+                $('.update_stage_modal .modal-body').html(data);
+            }
+        })
+    });
+
+    /**************************************************************/
+    
 
     /**
      * Change password for admin

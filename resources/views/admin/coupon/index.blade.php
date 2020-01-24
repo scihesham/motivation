@@ -46,6 +46,8 @@
                                         <th>صوره الكوبون</th>
                                         <th>اسم الشركه</th>
                                         <th>القسم</th>
+                                        <th>المرحله</th>
+                                        <th>عدد الكوينز</th>
                                         <th class="text-center">تعديل</th>
                                         <th class="text-center">حذف</th>
                                     </tr>
@@ -53,7 +55,7 @@
                                 <tbody class="alluser">
                                     @foreach ($coupons as $key => $coupon)
                                     <tr class="">
-                                        <td>{{$key+1}}</td>
+                                        <td class="center-vc text-center">{{$key+1}}</td>
                                         <td class="center-vc">{{$coupon->coupon_title}}</td>
                                         <td class="center-vc text-center">{{$coupon->coupon_percentage}} %</td>
                                         <td class="text-center">
@@ -76,9 +78,15 @@
                                         </td>
                                         <td class="center-vc">
                                             <a class="update_cats_link" data-toggle="modal" data-target=".update_cats_modal" data-href="{{url('admin/categories').'/'.$coupon->category->id.'/edit'}}" style="cursor:pointer">
-                                            {{$coupon->category->name}}
+                                                {{$coupon->category->name}}
                                             </a>
                                         </td>
+                                        <td class="center-vc text-center">
+                                            <a class="update_stage_link" data-toggle="modal" data-target=".update_stage_modal" data-href="{{url('admin/stages').'/'.$coupon->stage->id.'/edit'}}" style="cursor:pointer">
+                                            {{$coupon->stage->title}}
+                                            </a>
+                                        </td>
+                                        <td class="center-vc text-center">{{$coupon->coins}}</td>
                                         <td class="text-center center-vc"><a class="btn btn-primary btn-sm update_coupon_link" data-toggle="modal" data-target=".update_coupon_modal" data-href="{{url('admin/coupons').'/'.$coupon->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
                                         <td class="text-center" style="vertical-align: middle;">
                                             <a class="btn btn-danger btn-sm" href="{{url('admin/coupons').'/'.$coupon->id.'/delete'}}" onclick='return myfunc()'><i class="fa fa-trash-o"></i></a>
@@ -97,6 +105,8 @@
                                         <th>صوره الكوبون</th>
                                         <th>اسم الشركه</th>
                                         <th>القسم</th>
+                                        <th>المرحله</th>
+                                        <th>عدد الكوينز</th>
                                         <th class="text-center">تعديل</th>
                                         <th class="text-center">حذف</th>
                                     </tr>
@@ -139,15 +149,20 @@
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace('summary-ckeditor');
+
 </script>
 
 <script src="{{url('public/design/adminlte/colorbox/jquery.colorbox.js')}}"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         //Examples of how to assign the Colorbox event to elements
-//        $(".group1").colorbox({rel:'group1'});
-        $(".group1").colorbox({rel:'group1', maxWidth:"800px"});
+        //        $(".group1").colorbox({rel:'group1'});
+        $(".group1").colorbox({
+            rel: 'group1',
+            maxWidth: "800px"
+        });
     });
+
 </script>
 @endsection
 
@@ -191,7 +206,7 @@
 
                                 <div class="form-group">
                                     <label>صورة الكوبون </label>
-                                    <input type="file" name="attachment" id=''  class="form-control"  required>
+                                    <input type="file" name="attachment" id='' class="form-control" required>
                                 </div>
 
                                 <div class="form-group">
@@ -203,7 +218,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label>القسم *</label>
                                     <select name="category_id" class="select" required>
@@ -212,6 +227,21 @@
                                         <option value="{{$val->id}}">{{$val->name}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>المرحله *</label>
+                                    <select name="stage_id" class="select" required>
+                                        <option value="">...</option>
+                                        @foreach(\App\Stage::orderBy('ordering', 'desc')->get() as $key => $val)
+                                        <option value="{{$val->id}}">{{$val->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>عدد الكوينز </label>
+                                    <input type="number" name="coins" id='' placeholder="العدد" class="form-control" value="{{ old('coins') }}" required>
                                 </div>
 
                             </div>
@@ -275,6 +305,23 @@
             <div class="modal-header">
                 <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">تعديل القسم</h4>
+            </div>
+            <div class="modal-body body-edit"></div>
+
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade update_stage_modal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:700px">
+
+
+            <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">تعديل المرحله</h4>
             </div>
             <div class="modal-body body-edit"></div>
 

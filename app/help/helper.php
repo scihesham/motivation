@@ -69,20 +69,37 @@ function addFile($request, $folder){
 
 /* edit file */
 function editFile($request, $folder, $obj){
-    $attach = $request->attachment;
-    $attachment = $request->attachment;
-    $newname =  Auth::user()->id.'_'.date("d_m_Y").rand(1, 1000).time().'_'.rand(1, 1000).'.'.$attach->getClientOriginalExtension();
-    $attachment->move(public_path('upload'.'/'.$folder), $newname);
-    /* delete old file */
-    $file_path = public_path('upload/'.$obj->attach->path);  
-    if(File::exists($file_path)) {
-            File::delete($file_path);
+    if(!empty($request->attachment)){
+        $attach = $request->attachment;
+        $attachment = $request->attachment;
+        $newname =  Auth::user()->id.'_'.date("d_m_Y").rand(1, 1000).time().'_'.rand(1, 1000).'.'.$attach->getClientOriginalExtension();
+        $attachment->move(public_path('upload'.'/'.$folder), $newname);
+        /* delete old file */
+        $file_path = public_path('upload/'.$obj->attach->path);  
+        if(File::exists($file_path)) {
+                File::delete($file_path);
+        }
+        /* edit attachment database */
+        $obj->attach->fill([
+            'name' => $attachment->getClientOriginalName(),
+            'path' => $folder.'/'.$newname
+        ])->save();
     }
-    /* edit attachment database */
-    $obj->attach->fill([
-        'name' => $attachment->getClientOriginalName(),
-        'path' => $folder.'/'.$newname
-    ])->save();
 }
+
+/* delete file */
+function deleteFile($obj){
+    if(isset($obj->attach->path)){
+        $file_path = public_path('upload/'.$obj->attach->path);  
+        if(File::exists($file_path)) {
+                File::delete($file_path);
+        }
+        $obj->attach->delete();
+    }
+}
+
+
+
+
 
 ?>

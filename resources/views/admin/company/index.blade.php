@@ -70,7 +70,7 @@
                                         </td>
                                         <td class="text-center center-vc"><a class="btn btn-primary btn-sm update_company_link" data-toggle="modal" data-target=".update_company_modal" data-href="{{url('admin/companies').'/'.$company->id.'/edit'}}"><i class="fa fa-edit"></i></a></td>
                                         <td class="text-center" style="vertical-align: middle;">
-                                            <a class="btn btn-danger btn-sm" href="{{url('admin/companies').'/'.$company->id.'/delete'}}" onclick='return myfunc()'><i class="fa fa-trash-o"></i></a>
+                                            <a class="btn btn-danger btn-sm" href="{{url('admin/companies').'/'.$company->id.'/delete'}}" onclick='return myfuncAr()'><i class="fa fa-trash-o"></i></a>
                                         </td>
 
                                     </tr>
