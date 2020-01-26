@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Illuminate\Validation\Rule;
 use Hash;
 
 class UserController extends Controller
@@ -64,6 +65,39 @@ class UserController extends Controller
         $user['city_title'] = ksaCities()[$user->city];
         $user['stage'] = $user->stage();
         return response()->json($user);
+    }
+    
+    
+    public function update(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(Auth::user()->id),],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'phone' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'integer'],
+        ]);
+
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);            
+        }
+        
+        $user = Auth::user();
+        $res = $user->fill($request->except(['password', 'password_confirmation', 'permission']))->save();
+        if(!empty($request['password'])){
+            $password = Hash::make($request->password);
+            $user->password = $password;
+            $user->save();
+        }
+
+        if($res == true){
+            return response()->json(['success', 'تم تعديل العضو بنجاح']);
+        }
+        else{
+           return response()->json(['error', 'Something Went Wrong']); 
+        }
     }
     
     

@@ -27,11 +27,19 @@ Route::get('cities', 'Api\CityController@index');
 /* CategoryController */
 Route::get('categories', 'Api\CategoryController@index');
 
+/* ActivityController */
+Route::get('activities', 'Api\ActivityController@index');
+
+/* StageController */
+Route::get('stages', 'Api\StageController@index');
+
+/* CouponController */
+Route::get('coupons', 'Api\CouponController@index');
 
 Route::group(['middleware' => 'auth:api'], function(){
   
     Route::get('profile', 'Api\UserController@details');
-    
+    Route::patch('profile', 'Api\UserController@update');
 
     
 });
