@@ -16,3 +16,22 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* UserController */
+Route::post('login', 'Api\UserController@login');
+Route::post('register', 'Api\UserController@register');
+
+/* CityController */
+Route::get('cities', 'Api\CityController@index');
+
+/* CategoryController */
+Route::get('categories', 'Api\CategoryController@index');
+
+
+Route::group(['middleware' => 'auth:api'], function(){
+  
+    Route::get('profile', 'Api\UserController@details');
+    
+
+    
+});
